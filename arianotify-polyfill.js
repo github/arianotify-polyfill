@@ -1,6 +1,6 @@
 // @ts-check
 
-if (!("ariaNotify" in Element.prototype)) {
+if (!("ariaNotify" in Element.prototype) || !("ariaNotify" in Document.prototype)) {
   /** @type {string} */
   let uniqueId = `${Date.now()}`;
   try {
@@ -166,15 +166,31 @@ if (!("ariaNotify" in Element.prototype)) {
   }
   customElements.define(liveRegionCustomElementName, LiveRegionCustomElement);
 
-  /**
-   * @param {string} message
-   * @param {object} options
-   * @param {"high" | "normal"} [options.priority]
-   */
-  Element.prototype["ariaNotify"] = function (
-    message,
-    { priority = "normal" } = {}
-  ) {
-    queue.enqueue(new Message({ element: this, message, priority }));
-  };
+  if (!("ariaNotify" in Element.prototype)) {
+    /**
+     * @param {string} message
+     * @param {object} options
+     * @param {"high" | "normal"} [options.priority]
+     */
+    Element.prototype["ariaNotify"] = function (
+      message,
+      { priority = "normal" } = {}
+    ) {
+      queue.enqueue(new Message({ element: this, message, priority }));
+    };
+  }
+
+  if (!("ariaNotify" in Document.prototype)) {
+    /**
+     * @param {string} message
+     * @param {object} options
+     * @param {"high" | "normal"} [options.priority]
+     */
+    Document.prototype["ariaNotify"] = function (
+      message,
+      { priority = "normal" } = {}
+    ) {
+      queue.enqueue(new Message({ element: this.documentElement, message, priority }));
+    };
+  }
 }
