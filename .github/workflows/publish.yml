@@ -11,7 +11,7 @@ permissions:
 jobs:
   test:
     name: Test
-    uses: github/ariaNotify-polyfill/.github/workflows/test.yml@main
+    uses: github/arianotify-polyfill/.github/workflows/test.yml@main
     secrets: inherit
   publish-npm:
     needs: [test]

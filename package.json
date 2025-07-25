@@ -4,13 +4,13 @@
   "description": "Polyfill for the ARIA Notification API",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github/ariaNotify-polyfill.git"
+    "url": "git+https://github.com/github/arianotify-polyfill.git"
   },
   "keywords": [],
   "license": "MIT",
   "author": "GitHub Inc.",
-  "main": "ariaNotify-polyfill.js",
-  "module": "ariaNotify-polyfill.js",
+  "main": "arianotify-polyfill.js",
+  "module": "arianotify-polyfill.js",
   "type": "module",
   "directories": {
     "example": "examples"

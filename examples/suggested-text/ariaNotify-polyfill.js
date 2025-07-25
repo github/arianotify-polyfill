@@ -1,1 +1,1 @@
-../../ariaNotify-polyfill.js
+../../arianotify-polyfill.js
