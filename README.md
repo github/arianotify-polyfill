@@ -1,4 +1,4 @@
-# ariaNotify-polyfill
+# arianotify-polyfill
 
 Polyfill for the [ARIA Notification API](https://github.com/WICG/accessible-notifications/blob/main/README.md)
 
@@ -15,13 +15,13 @@ In browsers where `ariaNotify` is supported it will emit a notification event. I
 This is only meant to be used in a browser context. It should not be used on the server. To install this you will likely need `npm`.
 
 ```sh
-$ npm i @github/ariaNotify-polyfill
+$ npm i @github/arianotify-polyfill
 ```
 
 In your JavaScript you can introduce the polyfill using a "bare" import:
 
 ```js
-import "@github/ariaNotify-polyfill"
+import "@github/arianotify-polyfill"
 ```
 
 Then continue to use `ariaNotify` as if it were supported everywhere. A small contrived example:
