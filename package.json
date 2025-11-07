@@ -17,7 +17,7 @@
   },
   "files": [],
   "scripts": {
-    "test": "web-test-runner",
+    "test": "npx playwright install firefox && web-test-runner",
     "test:guidepup": "npx playwright test"
   },
   "devDependencies": {
@@ -25,6 +25,7 @@
     "@guidepup/guidepup": "^0.24.0",
     "@guidepup/playwright": "^0.14.1",
     "@playwright/test": "^1.48.0",
-    "@web/test-runner": "^0.20.1"
+    "@web/test-runner": "^0.20.1",
+    "@web/test-runner-playwright": "^0.11.1"
   }
 }
