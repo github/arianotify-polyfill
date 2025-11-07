@@ -7,10 +7,7 @@ export default {
   browsers: [
     playwrightLauncher({
       product: 'firefox', // Use Firefox instead of Chrome (web-test-runner’s default), because Firefox doesn’t have a native implementation of 'ariaNotify' (as of 2025-11-07), so we can test the polyfill in it.
-      launchOptions: {
-        headless: true,
-        executablePath: process.env.CI ? '/usr/bin/firefox' : undefined // Use the Action runner’s preinstalled Firefox so we don‘t have to wait on a slow download/install process.
-      },
+      launchOptions: { headless: true }
     }),
   ],
   plugins: [
