@@ -58,7 +58,7 @@ if (!("ariaNotify" in Element.prototype) || !("ariaNotify" in Document.prototype
         // If there is a modal element on the page, everything outside of it is implicitly inert.
         // This can be checked by seeing if the element is within the modal, if the modal is present.
         (this.element.ownerDocument
-          .querySelector(":modal")
+          .querySelector(CSS.supports("selector(:modal)") ? ":modal" : "dialog[open]")
           ?.contains(this.element) ??
           true)
       );
