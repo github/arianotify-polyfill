@@ -1,6 +1,13 @@
 // @ts-check
 
-if (!("ariaNotify" in Element.prototype) || !("ariaNotify" in Document.prototype)) {
+const domAPIsAreAvailable =
+  typeof globalThis.Element !== "undefined" &&
+  typeof globalThis.Document !== "undefined";
+
+if (
+  domAPIsAreAvailable &&
+  (!("ariaNotify" in Element.prototype) || !("ariaNotify" in Document.prototype))
+) {
   /** @type {string} */
   let uniqueId = `${Date.now()}`;
   try {
