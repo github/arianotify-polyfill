@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+    groups:
+      # Open PRs for each major version and security update
+      # Open an aggregate PR for all minor and patch version updates
+      npm-minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"
+    groups:
+      # Open an aggregate PR for all GitHub Actions updates
+      github-actions:
+        patterns:
+          - "*"
+    schedule:
+      interval: "weekly"
