@@ -29,7 +29,7 @@ const test = baseTest.extend({
       route.fulfill({
         path: path.join(
           import.meta.dirname,
-          "..",
+          "../..",
           new URL(request.url()).pathname
         ),
       })
@@ -84,6 +84,13 @@ if (process.platform === "win32") {
   });
 
   test("SuggestedText", async ({ page }) => {
+    // Wait for page to load
+    await page.waitForTimeout(500);
+
+    // Focus the textarea and wait for NVDA virtual cursor to move there
+    await page.getByRole("textbox", { name: "Add a comment" }).click();
+    await page.waitForTimeout(500);
+
     // Type a completable string in the textarea
     await nvda.type("a");
 
