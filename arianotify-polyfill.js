@@ -75,6 +75,7 @@ if (
     async announce() {
       // Skip an unannounceable message.
       if (!this.#canAnnounce()) {
+        console.warn("Skipping unannounceable message:", this.message);
         return;
       }
 
@@ -97,6 +98,7 @@ if (
       }
 
       await sleep(250);
+      console.log("Announcing message:", this.message);
       liveRegion.handleMessage(passkey, this.message);
     }
   }
