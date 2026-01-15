@@ -33,5 +33,8 @@ jobs:
       - run: npm install -g npm@^11.0.0
       - run: npm ci
       - uses: guidepup/setup-action@eefb29916eda6dfda810adc0ac72faea006dbba6
-      - run: defaults read com.apple.VoiceOver4/default SCREnableAppleScript
+      - run: |
+          defaults read com.apple.VoiceOver4/default SCREnableAppleScript
+          defaults read com.apple.VoiceOver4/default SCRCategories_SCRCategorySystemWide_SCRSpeechLanguages_default_SCRSpeechComponentSettings_SCRRateAsPercent
+          defaults read com.apple.VoiceOver4/default SCRContextualHelpDelayInSeconds
       - run: npm run test:guidepup
