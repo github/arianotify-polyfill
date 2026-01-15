@@ -18,7 +18,7 @@
   "files": [],
   "scripts": {
     "test": "npx playwright install firefox && web-test-runner",
-    "test:guidepup": "npx playwright test"
+    "test:guidepup": "npx playwright install firefox && npx playwright test"
   },
   "devDependencies": {
     "@esm-bundle/chai": "^4.3.4-fix.0",

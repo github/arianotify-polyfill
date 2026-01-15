@@ -45,8 +45,8 @@ if (process.platform === "darwin") {
     await page.locator("body").focus();
 
     // Navigate to the beginning of the web content.
-    await voiceOver.interact();
-    await voiceOver.perform(voiceOver.keyboardCommands.jumpToLeftEdge);
+    // await voiceOver.interact();
+    // await voiceOver.perform(voiceOver.keyboardCommands.jumpToLeftEdge);
 
     // Clear out logs.
     await voiceOver.clearItemTextLog();
@@ -59,6 +59,13 @@ if (process.platform === "darwin") {
   });
 
   test("SuggestedText", async ({ page }) => {
+    // Wait for page to load
+    await page.waitForTimeout(500);
+
+    // Focus the textarea and wait for VoiceOver cursor to move there
+    await page.getByRole("textbox", { name: "Add a comment" }).click();
+    await page.waitForTimeout(500);
+
     // Type a completable string in the textarea
     await voiceOver.type("a");
 
