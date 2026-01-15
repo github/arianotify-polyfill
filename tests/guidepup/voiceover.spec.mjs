@@ -13,7 +13,7 @@ const test = baseTest.extend({
       route.fulfill({
         path: path.join(
           import.meta.dirname,
-          "..",
+          "../..",
           new URL(request.url()).pathname
         ),
       })
