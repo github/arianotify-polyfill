@@ -44,10 +44,6 @@ if (process.platform === "darwin") {
     await page.locator("body").waitFor();
     await page.locator("body").focus();
 
-    // Navigate to the beginning of the web content.
-    // await voiceOver.interact();
-    // await voiceOver.perform(voiceOver.keyboardCommands.jumpToLeftEdge);
-
     // Clear out logs.
     await voiceOver.clearItemTextLog();
     await voiceOver.clearSpokenPhraseLog();
