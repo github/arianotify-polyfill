@@ -33,7 +33,7 @@ jobs:
           cache: npm
       - run: npm install -g npm@^11.0.0
       - run: npm ci
-      - uses: guidepup/setup-action@eefb29916eda6dfda810adc0ac72faea006dbba6
+      - uses: guidepup/setup-action@4aa2ebd687ff687a31d7c17184beac3c606d64cd
       - run: npm run test:guidepup
   guidepup-windows:
     name: Guidepup (Windows)
@@ -47,5 +47,5 @@ jobs:
           cache: npm
       - run: npm install -g npm@^11.0.0
       - run: npm ci
-      - uses: guidepup/setup-action@eefb29916eda6dfda810adc0ac72faea006dbba6
+      - uses: guidepup/setup-action@4aa2ebd687ff687a31d7c17184beac3c606d64cd
       - run: npm run test:guidepup
