@@ -20,6 +20,9 @@
     "test": "npx playwright install firefox && web-test-runner",
     "test:guidepup": "npx playwright install firefox && npx playwright test"
   },
+  "overrides": {
+    "yauzl": "^3.2.1"
+  },
   "devDependencies": {
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@guidepup/guidepup": "^0.24.0",
