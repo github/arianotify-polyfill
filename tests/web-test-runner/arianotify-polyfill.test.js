@@ -48,7 +48,7 @@ export async function tests() {
     });
 
     it("routes assertive messages to the assertive live region", async () => {
-      container.ariaNotify("Emergency!", { priority: "high" });
+      container.ariaNotify("Update available", { priority: "high" });
       const liveRegions = Array.from(container.children).filter((node) =>
         node.tagName.match(/-live-region/i)
       );
@@ -62,7 +62,7 @@ export async function tests() {
 
       await new Promise((resolve) => setTimeout(resolve, 300));
       expect(calls).to.have.length(1);
-      expect(calls[0][1]).to.equal("Emergency!");
+      expect(calls[0][1]).to.equal("Update available");
     });
   });
 }
