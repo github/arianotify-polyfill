@@ -21,7 +21,10 @@ if (
   const passkey = Symbol();
 
   /** @type {string} */
-  const liveRegionCustomElementName = `live-region-${uniqueId}`;
+  const politeLiveRegionCustomElementName = `polite-live-region-${uniqueId}`;
+
+  /** @type {string} */
+  const assertiveLiveRegionCustomElementName = `assertive-live-region-${uniqueId}`;
 
   /**
    * @param {number} ms
@@ -79,16 +82,19 @@ if (
       }
 
       // Get root element
-      let root = /** @type {Element} */ (
+      let root = /** @type {Element | ShadowRoot | Document} */ (
         this.element.closest("dialog") || this.element.closest("[role='dialog']") || this.element.getRootNode()
       );
       if (!root || root instanceof Document) root = document.body;
 
-      // Get 'live-region', if it already exists
-      /** @type {LiveRegionCustomElement | null} */
-      let liveRegion = root.querySelector(liveRegionCustomElementName);
+      const liveRegionCustomElementName =
+        this.priority === "high"
+          ? assertiveLiveRegionCustomElementName
+          : politeLiveRegionCustomElementName;
+      let liveRegion = /** @type {LiveRegionCustomElement | null} */ (
+        root.querySelector(liveRegionCustomElementName)
+      );
 
-      // Create (or recreate) 'live-region', if it doesn’t exist
       if (!liveRegion) {
         liveRegion = /** @type {LiveRegionCustomElement} */ (
           document.createElement(liveRegionCustomElementName)
@@ -145,7 +151,6 @@ if (
     #shadowRoot = this.attachShadow({ mode: "closed" });
 
     connectedCallback() {
-      this.ariaLive = "polite";
       this.ariaAtomic = "true";
       this.style.marginLeft = "-1px";
       this.style.marginTop = "-1px";
@@ -171,7 +176,29 @@ if (
       this.#shadowRoot.textContent = message;
     }
   }
-  customElements.define(liveRegionCustomElementName, LiveRegionCustomElement);
+
+  class PoliteLiveRegionCustomElement extends LiveRegionCustomElement {
+    connectedCallback() {
+      this.ariaLive = "polite";
+      super.connectedCallback();
+    }
+  }
+
+  class AssertiveLiveRegionCustomElement extends LiveRegionCustomElement {
+    connectedCallback() {
+      this.ariaLive = "assertive";
+      super.connectedCallback();
+    }
+  }
+
+  customElements.define(
+    politeLiveRegionCustomElementName,
+    PoliteLiveRegionCustomElement
+  );
+  customElements.define(
+    assertiveLiveRegionCustomElementName,
+    AssertiveLiveRegionCustomElement
+  );
 
   if (!("ariaNotify" in Element.prototype)) {
     /**
