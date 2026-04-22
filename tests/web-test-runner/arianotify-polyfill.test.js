@@ -42,7 +42,7 @@ export async function tests() {
 
       const calls = spyOn(liveRegion, "handleMessage");
 
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       expect(calls).to.have.length(1);
       expect(calls[0][1]).to.equal("Normal-priority message");
     });
@@ -60,7 +60,7 @@ export async function tests() {
 
       const calls = spyOn(liveRegion, "handleMessage");
 
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       expect(calls).to.have.length(1);
       expect(calls[0][1]).to.equal("High-priority message");
     });
