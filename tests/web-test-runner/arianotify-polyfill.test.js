@@ -30,7 +30,7 @@ export async function tests() {
     });
 
     it("routes polite messages to the polite live region", async () => {
-      container.ariaNotify("Hello, world!");
+      container.ariaNotify("Normal-priority message");
       const liveRegions = Array.from(container.children).filter((node) =>
         node.tagName.match(/-live-region/i)
       );
@@ -44,11 +44,11 @@ export async function tests() {
 
       await new Promise((resolve) => setTimeout(resolve, 300));
       expect(calls).to.have.length(1);
-      expect(calls[0][1]).to.equal("Hello, world!");
+      expect(calls[0][1]).to.equal("Normal-priority message");
     });
 
     it("routes assertive messages to the assertive live region", async () => {
-      container.ariaNotify("Update available", { priority: "high" });
+      container.ariaNotify("High-priority message", { priority: "high" });
       const liveRegions = Array.from(container.children).filter((node) =>
         node.tagName.match(/-live-region/i)
       );
@@ -62,7 +62,7 @@ export async function tests() {
 
       await new Promise((resolve) => setTimeout(resolve, 300));
       expect(calls).to.have.length(1);
-      expect(calls[0][1]).to.equal("Update available");
+      expect(calls[0][1]).to.equal("High-priority message");
     });
   });
 }
