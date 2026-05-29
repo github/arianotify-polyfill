@@ -9,8 +9,11 @@ const config = {
   retries: 0,
   projects: [
     {
-      name: 'firefox', // Use Firefox because Firefox doesn’t have a native implementation of 'ariaNotify' (as of 2026-01-15), so we can test the polyfill in it.
-      use: devices['Desktop Firefox'],
+      name: "Microsoft Edge",
+      use: {
+        ...devices["Desktop Edge"],
+        channel: "msedge",
+      },
     },
   ],
   quiet: false,

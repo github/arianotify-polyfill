@@ -6,8 +6,8 @@ export default {
   nodeResolve: true,
   browsers: [
     playwrightLauncher({
-      product: 'firefox', // Use Firefox instead of Chrome (web-test-runner’s default), because Firefox doesn’t have a native implementation of 'ariaNotify' (as of 2025-11-07), so we can test the polyfill in it.
-      launchOptions: { headless: true }
+      product: 'chromium',
+      launchOptions: { channel: "msedge", headless: true }
     }),
   ],
   plugins: [
@@ -18,6 +18,7 @@ export default {
           return context.body.replace(
             /<\/body>/,
             `
+  <script src="./tests/force-arianotify-polyfill.js"></script>
   <script src="./arianotify-polyfill.js"></script>
   <script type="module">
     import { runTests } from "@web/test-runner-mocha";

@@ -3,10 +3,16 @@
 const domAPIsAreAvailable =
   typeof globalThis.Element !== "undefined" &&
   typeof globalThis.Document !== "undefined";
+const shouldForceAriaNotifyPolyfill =
+  /** @type {typeof globalThis & {__ariaNotifyPolyfillForce?: boolean}} */ (
+    globalThis
+  ).__ariaNotifyPolyfillForce === true;
 
 if (
   domAPIsAreAvailable &&
-  (!("ariaNotify" in Element.prototype) || !("ariaNotify" in Document.prototype))
+  (shouldForceAriaNotifyPolyfill ||
+    !("ariaNotify" in Element.prototype) ||
+    !("ariaNotify" in Document.prototype))
 ) {
   /** @type {string} */
   let uniqueId = `${Date.now()}`;
@@ -200,31 +206,43 @@ if (
     AssertiveLiveRegionCustomElement
   );
 
-  if (!("ariaNotify" in Element.prototype)) {
-    /**
-     * @param {string} message
-     * @param {object} options
-     * @param {"high" | "normal"} [options.priority]
-     */
-    Element.prototype["ariaNotify"] = function (
-      message,
-      { priority = "normal" } = {}
-    ) {
-      queue.enqueue(new Message({ element: this, message, priority }));
-    };
+  /**
+   * @param {string} message
+   * @param {object} options
+   * @param {"high" | "normal"} [options.priority]
+   */
+  const elementAriaNotify = function (
+    message,
+    { priority = "normal" } = {}
+  ) {
+    queue.enqueue(new Message({ element: this, message, priority }));
+  };
+
+  if (shouldForceAriaNotifyPolyfill || !("ariaNotify" in Element.prototype)) {
+    Object.defineProperty(Element.prototype, "ariaNotify", {
+      configurable: true,
+      writable: true,
+      value: elementAriaNotify,
+    });
   }
 
-  if (!("ariaNotify" in Document.prototype)) {
-    /**
-     * @param {string} message
-     * @param {object} options
-     * @param {"high" | "normal"} [options.priority]
-     */
-    Document.prototype["ariaNotify"] = function (
-      message,
-      { priority = "normal" } = {}
-    ) {
-      queue.enqueue(new Message({ element: this.documentElement, message, priority }));
-    };
+  /**
+   * @param {string} message
+   * @param {object} options
+   * @param {"high" | "normal"} [options.priority]
+   */
+  const documentAriaNotify = function (
+    message,
+    { priority = "normal" } = {}
+  ) {
+    queue.enqueue(new Message({ element: this.documentElement, message, priority }));
+  };
+
+  if (shouldForceAriaNotifyPolyfill || !("ariaNotify" in Document.prototype)) {
+    Object.defineProperty(Document.prototype, "ariaNotify", {
+      configurable: true,
+      writable: true,
+      value: documentAriaNotify,
+    });
   }
 }

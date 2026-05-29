@@ -25,6 +25,13 @@ import path from "node:path";
 
 const test = baseTest.extend({
   context: async ({ context }, run) => {
+    await context.addInitScript({
+      path: path.join(
+        import.meta.dirname,
+        "..",
+        "force-arianotify-polyfill.js"
+      ),
+    });
     await context.route("**/*", (route, request) =>
       route.fulfill({
         path: path.join(
