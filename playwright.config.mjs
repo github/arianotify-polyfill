@@ -9,10 +9,10 @@ const config = {
   retries: 0,
   projects: [
     {
-      name: "Microsoft Edge",
+      name: "Google Chrome",
       use: {
-        ...devices["Desktop Edge"],
-        channel: "msedge",
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
       },
     },
   ],
