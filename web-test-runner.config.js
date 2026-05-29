@@ -18,8 +18,8 @@ export default {
           return context.body.replace(
             /<\/body>/,
             `
-  <script src="./tests/bypass-native-arianotify.js"></script>
-  <script src="./arianotify-polyfill.js"></script>
+  <script src="/tests/bypass-native-arianotify.js"></script>
+  <script src="/arianotify-polyfill.js"></script>
   <script type="module">
     import { runTests } from "@web/test-runner-mocha";
     import { tests } from "./arianotify-polyfill.test.js";
