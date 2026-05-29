@@ -1,1 +1,0 @@
-../../arianotify-polyfill.js
