@@ -1,15 +1,7 @@
-import { playwrightLauncher } from '@web/test-runner-playwright';
-
 export default {
   files: "tests/web-test-runner/*.test.html",
   coverage: true,
   nodeResolve: true,
-  browsers: [
-    playwrightLauncher({
-      product: 'chromium',
-      launchOptions: { channel: "msedge", headless: true }
-    }),
-  ],
   plugins: [
     {
       name: "include-polyfill",
