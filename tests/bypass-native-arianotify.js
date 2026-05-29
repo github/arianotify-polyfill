@@ -10,6 +10,6 @@ for (const prototype of [Element.prototype, Document.prototype]) {
   });
 }
 
-/** @type {typeof globalThis & {__ariaNotifyPolyfillForce?: boolean}} */ (
+/** @type {typeof globalThis & {__bypassNativeAriaNotify?: boolean}} */ (
   globalThis
-).__ariaNotifyPolyfillForce = true;
+).__bypassNativeAriaNotify = true;

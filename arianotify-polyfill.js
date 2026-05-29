@@ -3,14 +3,14 @@
 const domAPIsAreAvailable =
   typeof globalThis.Element !== "undefined" &&
   typeof globalThis.Document !== "undefined";
-const shouldForceAriaNotifyPolyfill =
-  /** @type {typeof globalThis & {__ariaNotifyPolyfillForce?: boolean}} */ (
+const shouldBypassNativeAriaNotify =
+  /** @type {typeof globalThis & {__bypassNativeAriaNotify?: boolean}} */ (
     globalThis
-  ).__ariaNotifyPolyfillForce === true;
+  ).__bypassNativeAriaNotify === true;
 
 if (
   domAPIsAreAvailable &&
-  (shouldForceAriaNotifyPolyfill ||
+  (shouldBypassNativeAriaNotify ||
     !("ariaNotify" in Element.prototype) ||
     !("ariaNotify" in Document.prototype))
 ) {
@@ -218,7 +218,7 @@ if (
     queue.enqueue(new Message({ element: this, message, priority }));
   };
 
-  if (shouldForceAriaNotifyPolyfill || !("ariaNotify" in Element.prototype)) {
+  if (shouldBypassNativeAriaNotify || !("ariaNotify" in Element.prototype)) {
     Object.defineProperty(Element.prototype, "ariaNotify", {
       configurable: true,
       writable: true,
@@ -238,7 +238,7 @@ if (
     queue.enqueue(new Message({ element: this.documentElement, message, priority }));
   };
 
-  if (shouldForceAriaNotifyPolyfill || !("ariaNotify" in Document.prototype)) {
+  if (shouldBypassNativeAriaNotify || !("ariaNotify" in Document.prototype)) {
     Object.defineProperty(Document.prototype, "ariaNotify", {
       configurable: true,
       writable: true,

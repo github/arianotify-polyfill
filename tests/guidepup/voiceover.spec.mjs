@@ -13,7 +13,7 @@ const test = baseTest.extend({
       path: path.join(
         import.meta.dirname,
         "..",
-        "force-arianotify-polyfill.js"
+        "bypass-native-arianotify.js"
       ),
     });
     await context.route("**/*", (route, request) =>
