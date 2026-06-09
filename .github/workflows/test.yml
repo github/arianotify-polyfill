@@ -12,7 +12,7 @@ jobs:
     name: Web Test Runner
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -25,7 +25,7 @@ jobs:
     name: Guidepup (macOS)
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -39,7 +39,7 @@ jobs:
     name: Guidepup (Windows)
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: actions/setup-node@v6
         with:
           node-version: 24
